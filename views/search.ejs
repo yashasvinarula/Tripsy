@@ -1,0 +1,90 @@
+<% include ./partials/header %>
+                    
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+                    
+                                <section class="container mt-3 mb-3">
+                                  <div class="row border border-light align-items-center mb-3 shadow p-3 bg-white rounded">
+                                    <div class="col-2">
+                                      <h4 class="text-center">Transit Name</h4>
+                                    </div>
+                                    <div class="col-2">
+                                      <h4 class="text-center">ETA</h4>
+                                    </div>
+                                    <div class="col-2">
+                                      <h4>Seats</h4>
+                                    </div>
+                                    <div class = 'col-2'>
+                                      <h4>Filled</h4>
+                                    </div>
+                                    <div class="col-2">
+                                      <h4 class="text-center">Journey Duration</h4>
+                                    </div>
+                                    <div class="col-2">
+                                      <h4 class="text-center" style="margin-left:40%">Transit Location</h4>
+                                    </div>
+                            
+                                  </div>
+                                  <% for (var i = 0; i < datas.length ; i++) { %>
+                                  
+                            
+                                  <div class="row border border-light align-items-center mb-3 shadow p-3 bg-white rounded">
+                                    <div class="col-2">
+                                      <h5 class="text-center"><%=datas[i].name%></h5>
+                                      <h5 class="text-center"><%= datas[i].html_instructions%></h5>
+                                    </div>
+                                    <div class="col-2">
+                                     <h5 class="text-center"><%=datas[i].arrival_time %></h5>
+                                    </div>
+                                    <div class = 'col-2'>
+                                    <h5>70</h5>
+                                    </div>
+                                    <div class = 'col-2' id = 'count'>
+                                    <h5>CC</h5>
+                                    </div>
+                                    <div class="col-2">
+                                      <h5 class="text-center"><%=datas[i].duration%></h5>
+                                    </div>
+                                    <div class="col-2">
+                                      <a href = 'https://www.google.co.in/maps/@28.6095865,77.03806139999999,17z' target = '_blank'>
+                                      <img src="https://img.icons8.com/color/1600/google-maps.png" alt="Dariya Ganj" class="img-fluid ml-5">
+                                       </a>
+                                    </div>
+                            
+                            
+                                  </div>
+                            <% } %>
+                                  
+                            
+                                </section>
+                              <script>
+                               
+                                
+                              </script>
+                              <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
+                              <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-database.js"></script>
+                              <script>
+                                // Initialize Firebase
+                                var config = {
+                                  apiKey: "AIzaSyDKe55kJAQ8QfXBpUa58niaaLp7Y1mQANA",
+                                  authDomain: "nodemcu-9c649.firebaseapp.com",
+                                  databaseURL: "https://nodemcu-9c649.firebaseio.com",
+                                  projectId: "nodemcu-9c649",
+                                  storageBucket: "nodemcu-9c649.appspot.com",
+                                  messagingSenderId: "484715035596"
+                                };
+                                firebase.initializeApp(config);
+                                var database = firebase.database();
+                                var starCountRef = firebase.database().ref('number/');
+                                starCountRef.on('value', function(snapshot) {
+                              
+                                  
+                                    document.getElementById('count').innerHTML = snapshot.val();
+                                  console.log(snapshot.val())
+                                });
+                              </script>
+                    
+<% include ./partials/footer %>
